@@ -1,0 +1,200 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: test-basic_construction
+      id: test-basic_construction
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: test-basic_construction
+        setup-command: ''
+        command: make test-basic_construction
+        timeout: 1
+        max-score: 5
+    - name: test-constructor_counter
+      id: test-constructor_counter
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: test-constructor_counter
+        setup-command: ''
+        command: make test-constructor_counter
+        timeout: 1
+        max-score: 5
+    - name: test-empty_string_construct
+      id: test-empty_string_construct
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: test-empty_string_construct
+        setup-command: ''
+        command: make test-empty_string_construct
+        timeout: 1
+        max-score: 5
+    - name: test-destructor_called
+      id: test-destructor_called
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: test-destructor_called
+        setup-command: ''
+        command: make test-destructor_called
+        timeout: 1
+        max-score: 5
+    - name: test-destructor_counter
+      id: test-destructor_counter
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: test-destructor_counter
+        setup-command: ''
+        command: make test-destructor_counter
+        timeout: 1
+        max-score: 5
+    - name: test-multiple_destructions
+      id: test-multiple_destructions
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: test-multiple_destructions
+        setup-command: ''
+        command: make test-multiple_destructions
+        timeout: 1
+        max-score: 5
+    - name: test-copy_has_same_data
+      id: test-copy_has_same_data
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: test-copy_has_same_data
+        setup-command: ''
+        command: make test-copy_has_same_data
+        timeout: 1
+        max-score: 7
+    - name: test-copy_is_deep
+      id: test-copy_is_deep
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: test-copy_is_deep
+        setup-command: ''
+        command: make test-copy_is_deep
+        timeout: 1
+        max-score: 8
+    - name: test-copy_counter
+      id: test-copy_counter
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: test-copy_counter
+        setup-command: ''
+        command: make test-copy_counter
+        timeout: 1
+        max-score: 5
+    - name: test-copy_empty_string
+      id: test-copy_empty_string
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: test-copy_empty_string
+        setup-command: ''
+        command: make test-copy_empty_string
+        timeout: 1
+        max-score: 5
+    - name: test-assignment_copies_data
+      id: test-assignment_copies_data
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: test-assignment_copies_data
+        setup-command: ''
+        command: make test-assignment_copies_data
+        timeout: 1
+        max-score: 7
+    - name: test-assignment_is_deep
+      id: test-assignment_is_deep
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: test-assignment_is_deep
+        setup-command: ''
+        command: make test-assignment_is_deep
+        timeout: 1
+        max-score: 8
+    - name: test-assignment_counter
+      id: test-assignment_counter
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: test-assignment_counter
+        setup-command: ''
+        command: make test-assignment_counter
+        timeout: 1
+        max-score: 5
+    - name: test-self_assignment_safe
+      id: test-self_assignment_safe
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: test-self_assignment_safe
+        setup-command: ''
+        command: make test-self_assignment_safe
+        timeout: 1
+        max-score: 5
+    - name: test-setdata_changes_content
+      id: test-setdata_changes_content
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: test-setdata_changes_content
+        setup-command: ''
+        command: make test-setdata_changes_content
+        timeout: 1
+        max-score: 5
+    - name: test-setdata_updates_length
+      id: test-setdata_updates_length
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: test-setdata_updates_length
+        setup-command: ''
+        command: make test-setdata_updates_length
+        timeout: 10
+        max-score: 5
+    - name: test-pass_by_value_triggers_copy
+      id: test-pass_by_value_triggers_copy
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: test-pass_by_value_triggers_copy
+        setup-command: ''
+        command: make test-pass_by_value_triggers_copy
+        timeout: 1
+        max-score: 5
+    - name: test-chain_assignment
+      id: test-chain_assignment
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: test-chain_assignment
+        setup-command: ''
+        command: make test-chain_assignment
+        timeout: 1
+        max-score: 5
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        TEST-BASIC_CONSTRUCTION_RESULTS: "${{steps.test-basic_construction.outputs.result}}"
+        TEST-CONSTRUCTOR_COUNTER_RESULTS: "${{steps.test-constructor_counter.outputs.result}}"
+        TEST-EMPTY_STRING_CONSTRUCT_RESULTS: "${{steps.test-empty_string_construct.outputs.result}}"
+        TEST-DESTRUCTOR_CALLED_RESULTS: "${{steps.test-destructor_called.outputs.result}}"
+        TEST-DESTRUCTOR_COUNTER_RESULTS: "${{steps.test-destructor_counter.outputs.result}}"
+        TEST-MULTIPLE_DESTRUCTIONS_RESULTS: "${{steps.test-multiple_destructions.outputs.result}}"
+        TEST-COPY_HAS_SAME_DATA_RESULTS: "${{steps.test-copy_has_same_data.outputs.result}}"
+        TEST-COPY_IS_DEEP_RESULTS: "${{steps.test-copy_is_deep.outputs.result}}"
+        TEST-COPY_COUNTER_RESULTS: "${{steps.test-copy_counter.outputs.result}}"
+        TEST-COPY_EMPTY_STRING_RESULTS: "${{steps.test-copy_empty_string.outputs.result}}"
+        TEST-ASSIGNMENT_COPIES_DATA_RESULTS: "${{steps.test-assignment_copies_data.outputs.result}}"
+        TEST-ASSIGNMENT_IS_DEEP_RESULTS: "${{steps.test-assignment_is_deep.outputs.result}}"
+        TEST-ASSIGNMENT_COUNTER_RESULTS: "${{steps.test-assignment_counter.outputs.result}}"
+        TEST-SELF_ASSIGNMENT_SAFE_RESULTS: "${{steps.test-self_assignment_safe.outputs.result}}"
+        TEST-SETDATA_CHANGES_CONTENT_RESULTS: "${{steps.test-setdata_changes_content.outputs.result}}"
+        TEST-SETDATA_UPDATES_LENGTH_RESULTS: "${{steps.test-setdata_updates_length.outputs.result}}"
+        TEST-PASS_BY_VALUE_TRIGGERS_COPY_RESULTS: "${{steps.test-pass_by_value_triggers_copy.outputs.result}}"
+        TEST-CHAIN_ASSIGNMENT_RESULTS: "${{steps.test-chain_assignment.outputs.result}}"
+      with:
+        runners: test-basic_construction,test-constructor_counter,test-empty_string_construct,test-destructor_called,test-destructor_counter,test-multiple_destructions,test-copy_has_same_data,test-copy_is_deep,test-copy_counter,test-copy_empty_string,test-assignment_copies_data,test-assignment_is_deep,test-assignment_counter,test-self_assignment_safe,test-setdata_changes_content,test-setdata_updates_length,test-pass_by_value_triggers_copy,test-chain_assignment
