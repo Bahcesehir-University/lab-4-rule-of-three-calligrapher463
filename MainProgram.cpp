@@ -78,8 +78,12 @@ public:
     // - Free the dynamically allocated memory
     // - Increment g_destructorCount
     ~DynamicBuffer() {
-        // TODO: Implement destructor
+        // TODO: Implement 
+    g_destructorCount++
+    delete[] m_data;   // free the array
+
         //   1. Increment g_destructorCount
+        
         //   2. Delete the dynamically allocated array (delete[])
     }
 
